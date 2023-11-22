@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* 定義變數 */
 :root {
     --main-bg-color: #000000; /* 主要背景顏色 */
@@ -576,3 +577,480 @@ body {
     bottom: 30px;
     border-radius: 50%;
 }
+=======
+/* 定義變數 */
+:root {
+    --main-bg-color: #000000; /* 主要背景顏色 */
+    --main-text-color: #ffffff; /* 主要字體顏色 */
+    --main-font-size: 14px;
+    --main-button-color: lightgray; /* 主要按鈕顏色 */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    margin: 0;
+}
+
+/* 導覽欄 */
+#navbar {     
+    background-color: var(--main-bg-color);
+    width: 100%;
+    margin: 20px 0;
+    position: relative;
+    display: flex;
+    align-items: center;    
+}
+
+.navbarbtn {
+    background-color: var(--main-button-color);
+    transition-duration: 0.4s;
+    padding: 10px;
+    font-size: var(--main-font-size) + 2;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.navbarbtn:hover {
+    filter: brightness(150%);
+    cursor: pointer;    
+}
+
+#navbarLeft, #navbarRight {
+    display: flex;    
+    align-items: center;    
+}
+
+#navbarLeft {
+    flex-grow: 1;
+    width: 100%;
+}
+
+#navbarRight {
+    
+}
+
+.expand {
+    
+}
+
+/* logo-image */
+#logoImageContainer {
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+}
+
+#logoImageContainer img {
+    width: 100px;
+    height: 50px;
+    object-fit: cover;
+}
+
+/* 搜尋欄 */
+#searchContainer {
+    min-width: 0;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    position: relative;
+    margin: 10px;
+}
+
+#searchForm {    
+    min-width: 0;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;        
+}
+
+#searchInput {
+    flex-grow: 1;
+    min-width: 0;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: var(--main-font-size);    
+    padding: 5px 0 5px 10px;
+    height: 100%;
+    margin: 0;
+    outline: none;
+}
+
+#searchForm:focus-within {
+    border-color: lightskyblue;
+}
+
+#searchButton {
+    background-color: transparent;
+    border-radius: 10px;    
+    border: none;
+}
+
+#searchResults {        
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    width: 100%;    
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;    
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#searchResults li:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#searchResults li:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#searchResults li {
+    color: #000000;
+    background-color: #ffffff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#searchResults li:hover {
+    background-color: var(--main-button-color);
+}
+
+/* 展開按鈕  */
+#memuBottonContainer {
+    display: none;
+    margin: 10px;
+}
+
+#memuBotton {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* 投稿作品 */
+#submittedWorkContainer {    
+    position: relative;
+    text-wrap: nowrap;  
+    margin: 10px;  
+}
+
+#submittedWorkButton {
+    border-radius: 50px;
+    position: relative;
+}
+
+/* 投稿作品選項 */
+#submissionOptions {
+    background-color: var(--main-button-color);
+    width: 100%;
+    padding: 10px 0;
+    border: 2px solid #8c8c8c;        
+    border-radius: 10px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;        
+}
+
+#submissionOptions a {
+    color: #000000;
+    background-color: var(--main-button-color);
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+}
+
+#submissionOptions a:hover {
+    filter: brightness(150%);
+    cursor: pointer;
+}
+
+/* 淡色、深色主題 */
+#themeToggleContainer {
+    margin: 10px;
+}
+
+#themeToggleBotton {
+    border-radius: 50px;
+}
+
+/* 會員 */
+#accountContainer {
+    margin: 10px;
+}
+
+#accountLogin {
+    display: flex;
+}
+
+#accountLoginButton {
+    border-radius: 50px 0 0 50px;
+}
+
+#accountSignUpButton {
+    border-radius: 0 50px 50px 0;
+}
+
+@media only screen and (max-width: 800px) {
+    #navbar {
+        flex-direction: column;
+    }
+    #navbarLeft, #navbarRight {
+        width: 100%;        
+    }
+
+    #navbarRight {
+        display: none;
+    }
+    #navbarRight.expand {
+        display: flex;
+        justify-content: center;
+    }
+    #memuBottonContainer {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    #navbarLeft {
+        flex-direction: column;
+    }
+    #navbarRight.expand {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* 作品類型選擇列 */
+#workTypeSelection {
+    background-color: var(--main-bg-color);
+    width: 100%;   
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+#workTypeSelection button {
+    margin: 5px;
+    padding: 10px;
+    color: var(--main-text-color);
+    background-color: var(--main-bg-color);
+    font-size: 16px;
+    border: none;
+    transition-duration: 0.4s;
+}
+
+#workTypeSelection button:hover {
+    background-color: #8c8c8c;
+    cursor: pointer;    
+}
+/* 作品廊容器 */
+#worksGalleryContainer {
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+/* 作品廊 */
+#worksGallery {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+/* 小說 */
+.novelWork {
+    display: flex;
+    /* border: 1px solid white; */
+    margin: 3px auto 3px auto;
+    width: 48%;
+    height: 220px;
+}
+
+.novelSeries, .novelTitle, .novelAuthor {    
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--main-text-color);
+}
+
+.novelSeries:hover, .novelTitle:hover, .novelAuthor:hover {
+    text-overflow: clip;
+}
+
+.novelWork a:hover {
+    filter: brightness(70%);
+    cursor: pointer;    
+}
+
+
+.novelInfo1, .novelInfo2, .novelInfo3 {    
+    max-height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 2px;
+}
+
+.novelInfo1 {
+    flex: 0 0 auto;    
+}
+
+.novelInfo2 {
+    flex: 1;
+}
+
+.novelInfo3 {
+    display: flex;
+    align-items: baseline;
+}
+
+.novelImg {
+    
+}
+
+.novelImg img {    
+    width: 128px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.novelImg img:hover {
+    filter: brightness(70%);
+    cursor: pointer;
+}
+
+.novelSeries {    
+    
+}
+
+.novelTitle {    
+    font-weight: bold;
+}
+
+.novelAuthor {
+    
+}
+
+.novelDescription {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 2px;        
+}
+
+.novelTags {
+    height: 40px;
+    overflow: hidden;    
+}
+
+.novelTags a {    
+    display: inline-block;
+    color: #669FC2;
+    margin-right: 5px;
+}
+
+.novelWordCount, .novelPublishTime, .novelLikes {
+    float: left;
+    margin: 0 5px 0 0;
+}
+
+.novelWordCount {
+    
+}
+
+.novelPublishTime{
+    
+}
+
+.novelLikes::before {
+    /* <i class="fa fa-heart" aria-hidden="true"></i> */
+    content: '\f004';
+    font-family: 'FontAwesome';
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.novelLikes {
+    
+}
+
+@media only screen and (max-width: 800px) {
+    .novelWork {
+        width: 98%;
+    }
+}
+
+#pagination {
+    display: inline-block;
+    align-items: center;
+}
+
+#pagination a {
+    color: var(--main-text-color);
+    min-width: 24px;
+    min-height: 24px;
+    padding: 16px;
+    align-items: center;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 0px solid var(--main-text-color);
+    border-radius: 50%;
+}
+
+#pagination a:hover {
+    color: var(--main-bg-color);
+    background-color: var(--main-text-color);
+}
+
+#pagination a.active {
+    background-color: var(--main-button-color);
+    color: #000000;
+}
+
+/* 捲動到頂部 */
+#scrollToTopButton {
+    background-color: var(--main-button-color);
+    transition-duration: 0.4s;
+}
+
+#scrollToTopButton:hover {
+    filter: brightness(110%);
+    cursor: pointer;    
+}
+
+@media only screen and (max-width: 800px) {
+    
+}
+
+/* 捲動到頂部 */
+#scrollToTopButton {
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    border-radius: 50%;
+}
+>>>>>>> 42bdeeca562fe504a335d2765b24f69cd7bb51de
