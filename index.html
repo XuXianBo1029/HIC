@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIC</title>
+    <link rel="icon" type="image/x-icon" href="images/HIC logo.ico">
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- font awesone icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- 導覽欄 -->
+    <div id="navbar">
+      <div id="navbarLeft">
+        <!-- logo-image -->
+        <div id="logoImageContainer">
+          <a href="index.html">
+            <img src="images/HIC logo.png" alt="HIC logo">
+          </a>
+        </div>
+        <!-- 搜尋欄 -->
+        <div id="searchContainer">
+          <form id="searchForm" action="/action_page.php">
+            <input type="text" placeholder="搜尋作品" name="search" id="searchInput">
+            <button type="submit" id="searchButton" class="navbarbtn"><i class="fa fa-search"></i></button>
+          </form>
+          <ul id="searchResults"></ul>
+        </div>
+        <!-- 菜單  -->
+        <div id="memuBottonContainer">
+          <button type="memu" id="memuBotton" class="navbarbtn" onclick="toggleNavbarRight()">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+        </div>      
+      </div>
+      <div id="navbarRight">
+        <!-- 投稿作品 -->
+        <div id="submittedWorkContainer">
+          <button type="button" id="submittedWorkButton" class="navbarbtn" onclick="expendSubmittedWorkOptions()">
+            投稿作品<i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <!-- 投稿作品選項 -->
+          <div id="submissionOptions">
+            <a href="#">小說</a>
+            <a href="#">插畫</a>
+            <a href="#">漫畫</a>
+          </div>
+        </div>
+        <!-- 淡色、深色主題 -->
+        <div id="themeToggleContainer">
+          <button type="button" id="themeToggleBotton" class="navbarbtn" onclick="toggleTheme()">深色主題</button>
+        </div>
+        <!-- 會員 -->
+        <div id="accountContainer">
+          <!-- -->
+          <div id="navbarLogin">
+            <button type="button" class="loginButton navbarbtn" onclick="document.getElementById('loginModal').style.display='block';">登入</button>
+            <button type="button" class="signUpButton navbarbtn" onclick="document.getElementById('signUpModal').style.display='block';">註冊</button>
+          </div>
+          <!-- -->
+          <div id="account">
+            
+          </div>
+        </div>
+      </div>  
+    </div>
+    <!-- 登入互動視窗 -->
+    <div id="loginModal">
+      <div id="loginContainer">
+        <span class="close" onclick="document.getElementById('loginModal').style.display='none'">&times;</span>
+        <form id="loginForm" action="/action_page.php">
+          <label for="username">使用者名稱</label>
+          <input type="text" placeholder="輸入使用者名稱" name="username" required>
+          <label for="password">密碼</label>
+          <input type="password" placeholder="輸入密碼" name="password" required>
+          <button type="submit">登入</button>
+        </form>
+        <div class="bottomContainer">
+          <button type="button" class="signUpButton" class="navbarbtn" onclick="signUpButton()">註冊</button>
+          <span class="forgetPassword"><a href="#">忘記密碼</a></span>
+        </div>        
+      </div>
+    </div>
+    <!-- 註冊互動視窗 -->
+    <div id="signUpModal">
+      <div id="signUpContainer">
+        <span class="close" onclick="document.getElementById('signUpModal').style.display='none'">&times;</span>
+        <form id="signUpForm" action="/action_page.php">
+          <label for="email">Email</label>
+          <input type="text" placeholder="輸入Email" name="email" required>
+          <label for="username">使用者名稱</label>
+          <input type="text" placeholder="輸入使用者名稱" name="username" required>
+          <label for="password">密碼</label>
+          <input type="password" placeholder="輸入密碼" name="password" required>
+          <label for="repeatPassword">重複輸入密碼</label>
+          <input type="password" placeholder="重複輸入密碼" name="repeatPassword" required>
+          <button type="submit">註冊</button>
+        </form>
+        <button type="button" class="loginButton" class="navbarbtn" onclick="loginButton()">登入</button>
+      </div>
+    </div>
+    <!-- 作品類型選擇列 -->
+    <div id="workTypeSelection">
+      <button type="button" onclick="workTypeSelection('novel')" id="novelWorkTypeButton">小說</button>
+      <button type="button" onclick="workTypeSelection('illustration')" id="illustrationWorkTypeButton">插畫</button>
+      <button type="button" onclick="workTypeSelection('comic')" id="comicWorkTypeButton">漫畫</button>
+    </div>
+    <!-- 作品廊容器 -->
+    <div id="worksGalleryContainer">
+      <div id="header">
+        <h1></h1>
+      </div>
+      <!-- 作品廊 -->
+      <div id="worksGallery">
+        <!-- ... -->
+      </div>
+      <div id="pagination">
+        <a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <!-- 捲動到頂部 -->
+    <button onclick="scrollToTop()" id="scrollToTopButton"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
