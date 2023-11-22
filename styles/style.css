@@ -273,7 +273,7 @@ body {
     background-color: var(--main-bg-color);
     margin: 10% auto 10% auto;
     border: 2px solid #8c8c8c;
-    padding: 20px 8px;
+    padding: 10px 8px;
     width: 80%;
     max-width: 400px;
 }
