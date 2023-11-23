@@ -112,9 +112,9 @@ function expendSubmittedWorkOptions() {
 }
 
 /* 切換主題 */
-function toggleTheme() {
-    let buttonElement = document.querySelector('#themeToggle button');
-    let root = document.documentElement;    
+function toggleTheme(buttonElement) {
+    // let buttonElement = document.querySelector('#themeToggle button');
+     let root = document.documentElement;    
     if (buttonElement.innerHTML == '深色主題') {
         buttonElement.innerHTML = '淡色主題';
         root.style.setProperty('--main-bg-color', '#ffffff');
