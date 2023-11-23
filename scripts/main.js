@@ -224,7 +224,7 @@ function loadnovel(page) {
         const artistLink = `/users/${i}`;
         const description = `這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。`;                
         const tags = generateRandomTags();
-        const cover = `./localStorage/novel/novel1/cover.png`;
+        const cover = `./localstorage/novel/novel1/cover.png`;
         const wordCount = Math.floor(Math.random() * (10000 - 100 + 1)) + 100; // 隨機100~10000之間
         const publishTime = currentDate.toISOString();                
         const likes = Math.floor(Math.random() * 10001); // 隨機0~10000之間
