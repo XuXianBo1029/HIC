@@ -244,7 +244,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 380px) {
     #navbarLeft {
         flex-direction: column;
     }
@@ -280,6 +280,7 @@ body {
 
 #loginContainer button:hover, #signUpContainer button:hover {
     cursor: pointer;
+    filter: brightness(150%);
 }
 
 .close {
@@ -349,8 +350,8 @@ body {
     font-weight: bold;
 }
 
-@media only screen and (max-width: 320px) {
-    #accountLoginContainer {
+@media only screen and (max-width: 380px) {
+    #loginContainer {
         margin-left: 0;
         margin-right: 0;
         width: 100%;
