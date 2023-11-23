@@ -53,7 +53,7 @@
         </div>
         <!-- 淡色、深色主題 -->
         <div id="themeToggleContainer">
-          <button type="button" id="themeToggleBotton" class="navbarbtn" onclick="toggleTheme()">深色主題</button>
+          <button type="button" id="themeToggleBotton" class="navbarbtn" onclick="toggleTheme(this)">深色主題</button>
         </div>
         <!-- 會員 -->
         <div id="accountContainer">
@@ -76,9 +76,9 @@
         <form id="loginForm" action="/action_page.php">
           <h1>登入</h1>
           <label for="username">使用者名稱</label>
-          <input type="text" placeholder="輸入使用者名稱" name="username" required>
+          <input type="text" id="username" placeholder="輸入使用者名稱" name="username" required>
           <label for="password">密碼</label>
-          <input type="password" placeholder="輸入密碼" name="password" required>
+          <input type="password" id="password" placeholder="輸入密碼" name="password" required>
           <button type="submit">登入</button>
         </form>
         <div class="bottomContainer">
@@ -94,13 +94,13 @@
         <form id="signUpForm" action="/action_page.php">
           <h1>註冊</h1>
           <label for="email">Email</label>
-          <input type="text" placeholder="輸入Email" name="email" required>
+          <input type="text" id="email" placeholder="輸入Email" name="email" required>
           <label for="username">使用者名稱</label>
-          <input type="text" placeholder="輸入使用者名稱" name="username" required>
+          <input type="text" id="username" placeholder="輸入使用者名稱" name="username" required>
           <label for="password">密碼</label>
-          <input type="password" placeholder="輸入密碼" name="password" required>
+          <input type="password" id="password" placeholder="輸入密碼" name="password" required>
           <label for="repeatPassword">重複輸入密碼</label>
-          <input type="password" placeholder="重複輸入密碼" name="repeatPassword" required>
+          <input type="password" id="repeatPassword" placeholder="重複輸入密碼" name="repeatPassword" required>
           <button type="submit">註冊</button>
         </form>
         <button type="button" class="loginButton" class="navbarbtn" onclick="loginButton()">登入</button>
