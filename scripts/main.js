@@ -113,7 +113,6 @@ function expendSubmittedWorkOptions() {
 
 /* 切換主題 */
 function toggleTheme(buttonElement) {
-    // let buttonElement = document.querySelector('#themeToggle button');
      let root = document.documentElement;    
     if (buttonElement.innerHTML == '深色主題') {
         buttonElement.innerHTML = '淡色主題';
