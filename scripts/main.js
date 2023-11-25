@@ -107,7 +107,7 @@ function toggleNavbarRight() {
 
 /* 展開投稿作品選項 */
 function expendSubmittedWorkOptions() {
-    let options = document.querySelector('#submissionOptions');
+    let options = document.getElementById('submissionOptions');
     options.style.display = options.style.display === 'block' ? 'none' : 'block';
 }
 
@@ -148,37 +148,69 @@ function signUpButton () {
     document.getElementById('signUpModal').style.display='block';
 }
 
+/* 展開投稿作品選項 */
+function expendAccountOptions() {
+    let options = document.getElementById('accountOptions');
+    options.style.display = options.style.display === 'block' ? 'none' : 'block';
+}
+
 /* 顯示選擇作品類型 */
 function workTypeSelection(workType) {
     selectedWorkType = workType;
+
     // 清除worksGallery
     document.getElementById("worksGallery").innerHTML = "";
-    /*
-    // 將作品類型選擇列按鈕取消邊框
-    const buttons = document.querySelectorAll('.workTypeSelection button');
-    
-    for (const button of buttons) {
-        button.style.border = "none";
-    }
-    */
-    document.getElementById("novelWorkTypeButton").style.border = "none";
-    document.getElementById("illustrationWorkTypeButton").style.border = "none";
-    document.getElementById("comicWorkTypeButton").style.borderTop = "none";
+
+    let novelWorkTypeButton = document.getElementById("novelWorkTypeButton");
+    let illustrationWorkTypeButton = document.getElementById("illustrationWorkTypeButton");
+    let comicWorkTypeButton = document.getElementById("comicWorkTypeButton");
+    // button都設為不能按、沒邊框
+    novelWorkTypeButton.disabled = true;
+    illustrationWorkTypeButton.disabled = true;
+    comicWorkTypeButton.disabled = true;
+
+    novelWorkTypeButton.style.border = "none";
+    illustrationWorkTypeButton.style.border = "none";
+    comicWorkTypeButton.style.border = "none";
+
+    novelWorkTypeButton.classList.add('no-hover');
+    illustrationWorkTypeButton.classList.add('no-hover');
+    comicWorkTypeButton.classList.add('no-hover');
+
     // 如果選擇小說類型
     if (selectedWorkType == 'novel') {
         loadnovel(1);
-        document.getElementById("novelWorkTypeButton").style.borderTop = "3px solid blue";
+
+        illustrationWorkTypeButton.disabled = false;
+        comicWorkTypeButton.disabled = false;
+
+        illustrationWorkTypeButton.classList.remove('no-hover');
+        comicWorkTypeButton.classList.remove('no-hover');
+
+        novelWorkTypeButton.style.borderTop = "3px solid blue";
     // 如果選擇插畫類型
     } else if (selectedWorkType == 'illustration') {
         //loadillustration(1);
-        document.getElementById("illustrationWorkTypeButton").style.borderTop = "3px solid blue";
+
+        novelWorkTypeButton.disabled = false;
+        comicWorkTypeButton.disabled = false;
+        
+        novelWorkTypeButton.classList.remove('no-hover');
+        comicWorkTypeButton.classList.remove('no-hover');
+
+        illustrationWorkTypeButton.style.borderTop = "3px solid blue";
     // 如果選擇漫畫類型
     } else if (selectedWorkType == 'comic') {
         //loadcomic(1);
-        document.getElementById("comicWorkTypeButton").style.borderTop = "3px solid blue";
+        
+        novelWorkTypeButton.disabled = false;
+        illustrationWorkTypeButton.disabled = false;
+
+        novelWorkTypeButton.classList.remove('no-hover');
+        illustrationWorkTypeButton.classList.remove('no-hover');
+
+        comicWorkTypeButton.style.borderTop = "3px solid blue";        
     }
-    
-    //clickedElement.style.borderTop = "3px solid blue";
 }
 
 /* 讀取小說資料第幾頁 */

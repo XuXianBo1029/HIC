@@ -57,14 +57,33 @@
         </div>
         <!-- 會員 -->
         <div id="accountContainer">
-          <!-- -->
+          <!-- 登入、註冊 -->
           <div id="navbarLogin">
             <button type="button" class="loginButton navbarbtn" onclick="document.getElementById('loginModal').style.display='block';">登入</button>
             <button type="button" class="signUpButton navbarbtn" onclick="document.getElementById('signUpModal').style.display='block';">註冊</button>
           </div>
-          <!-- -->
+          <!-- 會員 -->
           <div id="account">
-            
+            <button type="button" id="accountButton" class="" onclick="expendAccountOptions()">
+              <img src="./images/account.png" alt="account" class="accountAvatar">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>            
+            <div id="accountOptions">
+              <img src="./images/account.png" alt="account" class="accountAvatar">
+              <div id="username">username</div>
+              <div id="followContainer">
+                <div id="followText">關注</div>
+                <div id="followerCount">0</div>
+              </div>
+              <div id="fansContainer">
+                <div id="fansText">粉絲</div>
+                <div id="fansCount">0</div>
+              </div>
+              <a href="#">我的作品</a>
+              <a href="#">收藏</a>
+              <a href="#">設定</a>
+              <a href="#">登出</a>
+            </div>
           </div>
         </div>
       </div>  

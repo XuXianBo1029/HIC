@@ -124,7 +124,7 @@ body {
     display: none;    
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0;    
 }
 
 #searchResults li:first-child {
@@ -212,8 +212,10 @@ body {
     margin: 10px;
 }
 
+/* 登入、註冊 */
 #navbarLogin {
     display: flex;
+    /* display: none; */
 }
 
 #navbarLogin .loginButton {
@@ -254,11 +256,91 @@ body {
     }
 }
 
+/* 會員 */
+#account {
+    display: none;
+    /* display: flex; */
+    position: relative;    
+    align-items: center;
+    justify-content: center;
+}
+
+#accountButton {
+    position: relative;
+    align-items: center;
+    background-color: transparent;
+    color: var(--main-text-color);
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#accountButton:hover {
+    color: var(--main-bg-color);
+    background-color: #8c8c8c;
+    filter: brightness(150%);
+    cursor: pointer;
+}
+
+#accountButton .accountAvatar {
+    width: 30px;
+    height: 30px;  
+    margin-right: 5px;  
+}
+
+#accountOptions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    overflow: auto;
+    border: 2px solid var(--main-button-color);
+    background-color: var(--main-bg-color);
+}
+
+#accountOptions .accountAvatar {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+#accountOptions #username {
+    font-weight: bold;
+    margin: 10px;
+}
+
+#followContainer, #fansContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 10px;
+}
+
+#followText, #followerCount, #fansText, #fansCount {
+    margin: 5px;
+}
+
+#accountOptions a {
+    display: block;
+    padding: 5px;
+    white-space: nowrap;
+    color: var(--main-text-color);
+    text-decoration: none;
+    padding: 10px;
+}
+
+#accountOptions a:hover {
+    background-color: var(--main-text-color);
+    color: var(--main-bg-color);
+    cursor: pointer;
+}
+
 /* 登入、註冊互動視窗 */
 #loginModal, #signUpModal {
     display: none;
     position: fixed;
-    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -382,6 +464,12 @@ body {
     background-color: #8c8c8c;
     cursor: pointer;    
 }
+
+#workTypeSelection button.no-hover {
+    background-color: initial;
+    cursor: default;
+}
+
 /* 作品廊容器 */
 #worksGalleryContainer {
     margin: 50px 0;
