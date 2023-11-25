@@ -1,5 +1,5 @@
 # HIC
 
-https://hsienpo000.github.io/HIC/
+https://hsienpo000.github.io/HIC/  
 
-測試修改
+作品資料暫時隨機產生  
