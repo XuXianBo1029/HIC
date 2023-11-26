@@ -57,34 +57,46 @@ document.addEventListener('click', function (event) {
     }
 });
 
-// 傳送搜尋字串 返回開頭為字串的標籤
-function performSearch(inputLastWord) {
-    const prefix = inputLastWord;
-    
-    const filteredTagsData = allTagsData.filter(item => item.tagName && item.tagName.startsWith(prefix));
-    
-    updateResults(filteredTagsData);
-}
-
-// 更新搜尋結果
-function updateResults(results) {
-    const searchResults = document.getElementById('searchResults');
-    searchResults.innerHTML = '';
-    results.forEach(result => {
-        const li = document.createElement('li');
-        li.textContent = result.tagName;
-        searchResults.appendChild(li);
-    });
-
-    searchResults.style.display = results.length > 0 ? 'block' : 'none';
-}
-
 // 監控搜尋欄輸入改變事件
 document.getElementById('searchInput').addEventListener('input', function () {
-    const inputTags = document.getElementById('searchInput').value.trim().split(' ');
-    const inputLastWord = inputTags[inputTags.length - 1];
-    if (inputLastWord !== '') {
-        performSearch(inputLastWord);
+    let inputTags = document.getElementById('searchInput').value;
+
+    // 如果沒有輸入 或 最後一個字是空格就不顯示
+    if (inputTags.length == 0 || inputTags.charAt(inputTags.length - 1) === ' ') {
+        document.getElementById('searchResults').style.display = 'none';
+        return;
+    }
+    
+    // 去除前後空格
+    inputTags = inputTags.trim();
+
+    // 使用正規表達式替換多個空白為單一空白，如果沒有輸入就是空陣列
+    inputTags = (inputTags !== '') ? inputTags.replace(/\s+/g, ' ').split(' ') : [];        
+
+    if (inputTags.length > 0) {
+        // 最後一個標籤
+        const inputLastWord = inputTags[inputTags.length - 1];
+
+        // 過濾所有開頭為字串的標籤
+        const filteredTagsData = allTags.filter(tag => tag.startsWith(inputLastWord));
+        // console.log('filteredTagsData' + filteredTagsData);
+
+        // 如果過濾有標籤
+        if (filteredTagsData.length > 0) {
+            // 更新搜尋標籤結果
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = '';
+
+            filteredTagsData.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = result;
+                searchResults.appendChild(li);
+            });
+
+            searchResults.style.display = 'block';
+        } else {
+            document.getElementById('searchResults').style.display = 'none';
+        }
     } else {
         // 如果沒有輸入 隱藏搜尋結果
         document.getElementById('searchResults').style.display = 'none';
@@ -252,7 +264,7 @@ function loadnovel(page) {
     // 使用正規表達式替換多個空白為單一空白，如果沒有輸入就是空陣列
     inputTags = (inputTags !== '') ? inputTags.replace(/\s+/g, ' ').split(' ') : [];
     
-    document.getElementById('tags').textContent = inputTags.join(' ');
+    document.getElementById('searchTags').textContent = inputTags.join(' ');
 
     let filteredNovels;
     
@@ -270,7 +282,7 @@ function loadnovel(page) {
     // 取得共有多少個作品
     const numberOfFilteredNovels = filteredNovels.length;
 
-    document.getElementById('tagsCount').textContent = numberOfFilteredNovels + ' 作品';
+    document.getElementById('searchTagsCount').textContent = numberOfFilteredNovels + ' 作品';
 
     // 使用 slice 函數從 filteredNovels 中提取指定範圍的元素
     // 範圍為第(page - 1) * 20 + 1 個作品 到 第(page - 1) * 20 + 20 個作品

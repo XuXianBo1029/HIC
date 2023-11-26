@@ -16,9 +16,6 @@ let generateRandomTags = function() {
     return uniqueTags;
 }
 
-// 模擬的假伺服器小說所有標籤
-const allTagsData = allTags.map((tag, index) => ({id: index + 1, tagName: tag, count: 0}));
-
 // 模擬的假伺服器小說作品資料
 const novelArtworkData = [];
 

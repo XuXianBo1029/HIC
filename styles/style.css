@@ -440,6 +440,20 @@ body {
     }
 }
 
+/* 搜尋標籤、作品數量 */
+#searchTagsContainer {
+    padding: 0 50px;
+    align-items: center;
+    text-align: center;
+}
+#searchTags {
+    font-size: 20px;
+    font-weight: bold;    
+}
+#searchTagsCount {
+    
+}
+
 /* 作品類型選擇列 */
 #workTypeSelection {
     background-color: var(--main-bg-color);
