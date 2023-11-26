@@ -118,7 +118,7 @@ document.getElementById('searchForm').addEventListener('submit', function (event
 
     // 如果選擇小說類型
     if (selectedWorkType == 'novel') {
-        loadnovel(1);
+        loadNovel(1);
     // 如果選擇插畫類型
     } else if (selectedWorkType == 'illustration') {
         //loadillustration(1);
@@ -227,7 +227,7 @@ function workTypeSelection(workType) {
 
     // 如果選擇小說類型
     if (selectedWorkType == 'novel') {
-        loadnovel(1);
+        loadNovel(1);
 
         illustrationWorkTypeButton.disabled = false;
         comicWorkTypeButton.disabled = false;
@@ -238,7 +238,7 @@ function workTypeSelection(workType) {
         novelWorkTypeButton.style.borderTop = "3px solid blue";
     // 如果選擇插畫類型
     } else if (selectedWorkType == 'illustration') {
-        //loadillustration(1);
+        //loadIllustration(1);
 
         novelWorkTypeButton.disabled = false;
         comicWorkTypeButton.disabled = false;
@@ -249,7 +249,7 @@ function workTypeSelection(workType) {
         illustrationWorkTypeButton.style.borderTop = "3px solid blue";
     // 如果選擇漫畫類型
     } else if (selectedWorkType == 'comic') {
-        //loadcomic(1);
+        //loadComic(1);
         
         novelWorkTypeButton.disabled = false;
         illustrationWorkTypeButton.disabled = false;
@@ -261,8 +261,86 @@ function workTypeSelection(workType) {
     }
 }
 
+/* 生成分頁 */
+function generatePagination(numberOfFilteredNovels, artworksPerPage, selectPage) {
+    // 總共會有多少頁數
+    const totalPages = Math.ceil(numberOfFilteredNovels / artworksPerPage);    
+
+    const paginationContainer = document.getElementById('paginationContainer');
+    paginationContainer.innerHTML = '';
+
+    // 生成第一頁
+    const firstPageLink = document.createElement('a');
+    firstPageLink.id = `firstPage`;
+    firstPageLink.innerHTML = '<i class="fa fa-angle-double-left" aria-hidden="true"></i>';
+    firstPageLink.onclick = function() {
+        goToPage(1);
+    };
+    paginationContainer.appendChild(firstPageLink);
+    if (selectPage < 5) {
+        firstPageLink.style.visibility = 'hidden';
+    }
+
+    // 生成頁數
+    let minPage, maxPage;
+
+    if (totalPages > 7) {
+        if (selectPage + 3 <= 7) {
+            minPage = 1;
+            maxPage = 7;
+        } else if (selectPage + 3 >= totalPages) {
+            minPage = totalPages - 6;
+            maxPage = totalPages;
+        } else {
+            minPage = selectPage - 3;
+            maxPage = selectPage + 3;
+        }
+    } else {
+        minPage = 1;
+        maxPage = totalPages;
+    }
+
+    for (let i = minPage; i <= maxPage; i++) {
+        const pageLink = document.createElement('a');
+        pageLink.id = `page${i}`;
+        pageLink.textContent = i;
+        pageLink.onclick = function() {
+            goToPage(i);
+        };
+
+        if (i === selectPage) {
+            pageLink.classList.add('selectedPage');
+        }
+
+        paginationContainer.appendChild(pageLink);
+    }
+
+    // 生成最後一頁
+    const lastPageLink = document.createElement('a');
+    lastPageLink.id = `lastPage`;
+    lastPageLink.innerHTML = '<i class="fa fa-angle-double-right" aria-hidden="true"></i>';
+    lastPageLink.onclick = function() {
+        goToPage(totalPages);
+    };
+    paginationContainer.appendChild(lastPageLink);
+    if (totalPages - 3 <= selectPage) {
+        lastPageLink.style.visibility = 'hidden';
+    }
+}
+
+/* 去第幾頁 */
+function goToPage(selectPage) {
+    if (selectedWorkType == 'novel') {
+        loadNovel(selectPage);
+    } else if (selectedWorkType == 'illustration') {
+        //loadIllustration(1);
+    } else if (selectedWorkType == 'comic') {
+        //loadComic(1);
+    }
+}
+
 /* 讀取小說資料第幾頁 */
-function loadnovel(page) {
+function loadNovel(selectPage) {
     // 取得搜尋標籤
     let inputTags = document.getElementById('searchInput').value.trim();
 
@@ -291,8 +369,12 @@ function loadnovel(page) {
 
     // 使用 slice 函數從 filteredNovels 中提取指定範圍的元素
     // 範圍為第(page - 1) * 20 + 1 個作品 到 第(page - 1) * 20 + 20 個作品
-    let startIndex = (page - 1) * 20;
-    const paginatedNovels = filteredNovels.slice(startIndex, startIndex + 20);
+    let startIndex = (selectPage - 1) * 20;
+    let endIndex = Math.min(startIndex + 20, filteredNovels.length);
+    const paginatedNovels = filteredNovels.slice(startIndex, endIndex);
+
+    // 生成分頁
+    generatePagination(numberOfFilteredNovels, 20, selectPage);
 
     const galleryElement = document.getElementById("worksGallery");
 
@@ -389,9 +471,6 @@ function loadnovel(page) {
         galleryElement.appendChild(artworkElement);
     });
 }
-
-
-
 
 /* 捲動到頂部 */
 function scrollToTop() {

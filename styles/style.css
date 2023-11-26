@@ -447,10 +447,12 @@ body {
     text-align: center;
     color: var(--main-text-color);    
 }
+
 #searchTags {
     font-size: 20px;
     font-weight: bold;
 }
+
 #searchTagsCount {
     white-space: nowrap;
 }
@@ -628,12 +630,12 @@ body {
     }
 }
 
-#paginationConinter {
+#paginationContainer {
     display: inline-block;
     align-items: center;
 }
 
-#paginationConinter a {
+#paginationContainer a {
     color: var(--main-text-color);
     min-width: 24px;
     min-height: 24px;
@@ -646,12 +648,12 @@ body {
     border-radius: 50%;
 }
 
-#paginationConinter a:hover {
+#paginationContainer a:hover {
     color: var(--main-bg-color);
     background-color: var(--main-text-color);
 }
 
-#paginationConinter a.active {
+#paginationContainer a.selectedPage {
     background-color: var(--main-button-color);
     color: #000000;
 }
