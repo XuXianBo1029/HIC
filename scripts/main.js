@@ -46,14 +46,22 @@ let formatTimeDifference = function(publishTime) {
     }
 }
 
-// 點擊搜尋欄以外的地方不顯示searchResults
+// 點擊搜尋欄、展開button以外的地方不顯示
 document.addEventListener('click', function (event) {
     const searchContainer = document.getElementById('searchContainer');
-    const searchResults = document.getElementById('searchResults');
+    const submittedWorkButton = document.getElementById('submittedWorkButton');
+    const accountButton = document.getElementById('accountButton');
   
-    // 檢查點擊事件是否發生在searchContainer以外的地方
     if (!searchContainer.contains(event.target)) {
-      searchResults.style.display = 'none';
+        document.getElementById('searchResults').style.display = 'none';
+    }
+
+    if (!submittedWorkButton.contains(event.target)) {
+        document.getElementById('submissionOptions').style.display = 'none';
+    }
+
+    if (!accountButton.contains(event.target)) {
+        document.getElementById('accountOptions').style.display = 'none';
     }
 });
 
@@ -107,22 +115,19 @@ document.getElementById('searchInput').addEventListener('input', function () {
 document.getElementById('searchForm').addEventListener('submit', function (event) {
     // 防止預設表單提交行為
     event.preventDefault();
-    const query = document.getElementById('searchInput').value.trim();
 
-    if (query !== '') {
-        // 如果選擇小說類型
-        if (selectedWorkType == 'novel') {
-            loadnovel(1);
-        // 如果選擇插畫類型
-        } else if (selectedWorkType == 'illustration') {
-            //loadillustration(1);
-        // 如果選擇漫畫類型
-        } else if (selectedWorkType == 'comic') {
-            //loadcomic(1);
-        }
-    } else {
-        document.getElementById('searchResults').style.display = 'none';
+    // 如果選擇小說類型
+    if (selectedWorkType == 'novel') {
+        loadnovel(1);
+    // 如果選擇插畫類型
+    } else if (selectedWorkType == 'illustration') {
+        //loadillustration(1);
+    // 如果選擇漫畫類型
+    } else if (selectedWorkType == 'comic') {
+        //loadcomic(1);
     }
+
+    document.getElementById('searchResults').style.display = 'none';
 });
 
 // 點擊li tag，將搜尋input最後一個字串替換成li tag 再加上空格

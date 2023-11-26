@@ -445,13 +445,14 @@ body {
     padding: 0 50px;
     align-items: center;
     text-align: center;
+    color: var(--main-text-color);    
 }
 #searchTags {
     font-size: 20px;
-    font-weight: bold;    
+    font-weight: bold;
 }
 #searchTagsCount {
-    
+    white-space: nowrap;
 }
 
 /* 作品類型選擇列 */
