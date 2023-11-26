@@ -125,6 +125,10 @@
         <button type="button" class="loginButton" class="navbarbtn" onclick="loginButton()">登入</button>
       </div>
     </div>
+    <div id="tagsContainer">
+      <div id="tags"></div>
+      <div id="tagsCount"></div>
+    </div>
     <!-- 作品類型選擇列 -->
     <div id="workTypeSelection">
       <button type="button" onclick="workTypeSelection('novel')" id="novelWorkTypeButton">小說</button>
@@ -132,27 +136,30 @@
       <button type="button" onclick="workTypeSelection('comic')" id="comicWorkTypeButton">漫畫</button>
     </div>
     <!-- 作品廊容器 -->
-    <div id="worksGalleryContainer">
-      <div id="header">
-        <h1></h1>
-      </div>
+    <div id="worksGalleryContainer">      
       <!-- 作品廊 -->
       <div id="worksGallery">
-        <!-- ... -->
+        <!-- 作品 -->
       </div>
-      <div id="pagination">
-        <a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+      <div id="paginationConinter">
+        <a id="firstPage" onclick="goToPage()">
+          <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        </a>
+        <a id="page1" onclick="goToPage()">1</a>
+        <a id="page2" onclick="goToPage()">2</a>
+        <a id="page3" onclick="goToPage()">3</a>
+        <a id="page4" onclick="goToPage()">4</a>
+        <a id="page5" onclick="goToPage()">5</a>
+        <a id="page6" onclick="goToPage()">6</a>
+        <a id="page7" onclick="goToPage()">7</a>
+        <a id="lastPage" onclick="goToPage()">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
     <!-- 捲動到頂部 -->
     <button onclick="scrollToTop()" id="scrollToTopButton"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+    <script src="./scripts/mockData.js"></script>
     <script src="./scripts/main.js"></script>
   </body>
 </html>

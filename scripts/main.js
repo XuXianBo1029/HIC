@@ -1,9 +1,50 @@
-// 使用localStorage模擬資料庫有所有標籤
-const allTags = ["奇幻", "奇幻1", "奇幻2", "奇幻3", "冒險", "愛情", "歷史", "科幻", "驚悚", "懸疑", "犯罪", "家庭", "青春", "戰爭", "古裝", "現代", "幽默", "感人", "恐怖", "成長", "浪漫", "社會", "心理", "推理", "武俠", "短篇", "長篇", "穿越", "重生", "網遊", "競技", "二次元", "都市", "仙俠", "玄幻", "武侠", "宮廷", "軍事", "校園", "生活", "商戰", "宗教", "運動", "異能", "搞笑", "治愈", "日常", "劇情", "唯美", "輕小說", "歐美", "東方奇幻"];
-const allTagsData = allTags.map((tag, index) => ({ id: index + 1, tagName: tag }));
-
-// 目前選擇哪個類型的作品
+// 目前選擇哪個類型的作品 初始為小說
 let selectedWorkType = 'novel';
+
+// 返回投稿日期過了多久
+let formatTimeDifference = function(publishTime) {
+    const currentTime = new Date();
+    const postTime = new Date(publishTime);
+
+    const timeDifference = currentTime - postTime;
+    const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+
+    if (minutesDifference < 1) {
+        return "剛剛";
+    } else if (minutesDifference === 1) {
+        return "1分鐘前";
+    } else if (minutesDifference < 60) {
+        return `${minutesDifference}分鐘前`;
+    } else {
+        const hoursDifference = Math.floor(minutesDifference / 60);
+        if (hoursDifference === 1) {
+            return "1小時前";
+        } else if (hoursDifference < 24) {
+            return `${hoursDifference}小時前`;
+        } else {
+            const daysDifference = Math.floor(hoursDifference / 24);
+            if (daysDifference === 1) {
+                return "1天前";
+            } else if (daysDifference < 30) {
+                return `${daysDifference}天前`;
+            } else {
+                const monthsDifference = Math.floor(daysDifference / 30);
+                if (monthsDifference === 1) {
+                    return "1個月前";
+                } else if (monthsDifference < 12) {
+                    return `${monthsDifference}個月前`;
+                } else {
+                    const yearsDifference = Math.floor(monthsDifference / 12);
+                    if (yearsDifference === 1) {
+                        return "1年前";
+                    } else {
+                        return `${yearsDifference}年前`;
+                    }
+                }
+            }
+        }
+    }
+}
 
 // 點擊搜尋欄以外的地方不顯示searchResults
 document.addEventListener('click', function (event) {
@@ -19,20 +60,10 @@ document.addEventListener('click', function (event) {
 // 傳送搜尋字串 返回開頭為字串的標籤
 function performSearch(inputLastWord) {
     const prefix = inputLastWord;
-    // 使用localStorage模擬從資料庫取得搜尋資料
-    // 有一個table(allTagsData)有全部標籤 存放在模擬的資料庫中
-    localStorage.setItem('allTagsData', JSON.stringify(allTagsData));    
-    // 瀏覽器向伺服器請求(request) 要求所有開頭為字串的標籤 傳送一個字串
-    // 伺服器接受到請求 模擬的資料庫從table(allTagsData)篩選出開頭為字串的標籤
-    const storedAllTagsData = JSON.parse(localStorage.getItem('allTagsData'));
-    const filteredTagsData = storedAllTagsData.filter(item => item.tagName && item.tagName.startsWith(prefix));
-    localStorage.setItem('filteredTagsData', JSON.stringify(filteredTagsData));
-    // 伺服器回應(response) 傳回篩選好的標籤回來 瀏覽器解讀json 拿到需求資料
-    const responseData = JSON.parse(localStorage.getItem('filteredTagsData'));
-    // 清空整個 localStorage (並不是資料庫刪庫跑路，只是模擬不想占空間)
-    localStorage.clear();
-    // 更新結果
-    updateResults(responseData);
+    
+    const filteredTagsData = allTagsData.filter(item => item.tagName && item.tagName.startsWith(prefix));
+    
+    updateResults(filteredTagsData);
 }
 
 // 更新搜尋結果
@@ -215,127 +246,43 @@ function workTypeSelection(workType) {
 
 /* 讀取小說資料第幾頁 */
 function loadnovel(page) {
-    // 模擬資料庫 從 localStorage 取得小說資料
-    const novelArtworkData = [];    
     // 取得搜尋標籤
-    const inputTags = document.getElementById('searchInput').value.trim().split(' ');
-    // 產生隨機標籤
-    let generateRandomTags = function() {
-        const numberOfTags = Math.floor(Math.random() * 20) + 1; // 隨機1~20個
-        const shuffledTags = [...allTags].sort(() => 0.5 - Math.random());
+    let inputTags = document.getElementById('searchInput').value.trim();
 
-        const uniqueTagsSet = new Set();
-
-        // 如果搜尋欄有標籤 全部加入
-        inputTags.forEach((tag) => {
-            if (tag != "") {
-                uniqueTagsSet.add(tag);
-            }            
-        })
-
-        for (let i = 0; i < Math.min(numberOfTags, shuffledTags.length); i++) {
-            uniqueTagsSet.add(shuffledTags[i]);
-        }        
-
-        const uniqueTags = [...uniqueTagsSet];
-        
-        return uniqueTags;
-    }
-    // 模擬小說投稿日期 以現在
-    let currentDate = new Date();
-    // 第N頁的作品 投稿時間減少(page - 1) * 10小時
-    currentDate.setHours(currentDate.getHours() - (page - 1) * 10);
-    // 每頁有20個作品
-    for (let i = (page - 1) * 20 + 1, size = i + 19; i <= size; i++) {
-        const seriesName = `作品系列名稱${i} 名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱`;
-        const seriesLink = `/series/${i}`;
-        const title = `小說標題${i} 標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題`;
-        const artworkLink = `/artworks/${i}`;
-        const author = `作者${i} 作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者`;
-        const artistLink = `/users/${i}`;
-        const description = `這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。`;                
-        const tags = generateRandomTags();
-        const cover = `./localstorage/novel/novel1/cover.png`;
-        const wordCount = Math.floor(Math.random() * (10000 - 100 + 1)) + 100; // 隨機100~10000之間
-        const publishTime = currentDate.toISOString();                
-        const likes = Math.floor(Math.random() * 10001); // 隨機0~10000之間
+    // 使用正規表達式替換多個空白為單一空白，如果沒有輸入就是空陣列
+    inputTags = (inputTags !== '') ? inputTags.replace(/\s+/g, ' ').split(' ') : [];
     
-        novelArtworkData.push({
-            seriesName,
-            seriesLink,
-            title,
-            artworkLink,
-            author,
-            artistLink,
-            description,
-            tags,
-            cover,
-            wordCount,
-            publishTime,            
-            likes
+    document.getElementById('tags').textContent = inputTags.join(' ');
+
+    let filteredNovels;
+    
+    if (inputTags.length > 0) {
+        // 使用 filter 函數過濾符合搜尋標籤的小說
+        filteredNovels = novelArtworkData.filter(novel => {
+            // 使用 every 函數檢查 novel 的 tags 是否包含所有搜尋標籤
+            return inputTags.every(searchTag => novel.tags.includes(searchTag));
         });
-
-        currentDate.setMinutes(currentDate.getMinutes() - 30); // 每個作品投稿時間減少一小時
+    } else {
+        // 搜尋標籤沒有輸入標籤則不過濾標籤
+        filteredNovels = novelArtworkData;
     }
 
-    // 模擬從 localStorage 取得小說資料
-    // 存入 localStorage
-    localStorage.setItem('novelArtworkData', JSON.stringify(novelArtworkData));
-    // 從 localStorage 讀取並轉換回陣列
-    const storedNovelArtworkData = JSON.parse(localStorage.getItem('novelArtworkData'));
-    // 清空整個 localStorage
-    localStorage.clear();
+    // 取得共有多少個作品
+    const numberOfFilteredNovels = filteredNovels.length;
 
-    // 返回投稿日期過了多久
-    let formatTimeDifference = function(publishTime) {
-        const currentTime = new Date();
-        const postTime = new Date(publishTime);
-    
-        const timeDifference = currentTime - postTime;
-        const minutesDifference = Math.floor(timeDifference / (1000 * 60));
-    
-        if (minutesDifference < 1) {
-            return "剛剛";
-        } else if (minutesDifference === 1) {
-            return "1分鐘前";
-        } else if (minutesDifference < 60) {
-            return `${minutesDifference}分鐘前`;
-        } else {
-            const hoursDifference = Math.floor(minutesDifference / 60);
-            if (hoursDifference === 1) {
-                return "1小時前";
-            } else if (hoursDifference < 24) {
-                return `${hoursDifference}小時前`;
-            } else {
-                const daysDifference = Math.floor(hoursDifference / 24);
-                if (daysDifference === 1) {
-                    return "1天前";
-                } else if (daysDifference < 30) {
-                    return `${daysDifference}天前`;
-                } else {
-                    const monthsDifference = Math.floor(daysDifference / 30);
-                    if (monthsDifference === 1) {
-                        return "1個月前";
-                    } else if (monthsDifference < 12) {
-                        return `${monthsDifference}個月前`;
-                    } else {
-                        const yearsDifference = Math.floor(monthsDifference / 12);
-                        if (yearsDifference === 1) {
-                            return "1年前";
-                        } else {
-                            return `${yearsDifference}年前`;
-                        }
-                    }
-                }
-            }
-        }
-    }        
-        
+    document.getElementById('tagsCount').textContent = numberOfFilteredNovels + ' 作品';
+
+    // 使用 slice 函數從 filteredNovels 中提取指定範圍的元素
+    // 範圍為第(page - 1) * 20 + 1 個作品 到 第(page - 1) * 20 + 20 個作品
+    let startIndex = (page - 1) * 20;
+    const paginatedNovels = filteredNovels.slice(startIndex, startIndex + 20);
+
     const galleryElement = document.getElementById("worksGallery");
-    // 清空
+
     galleryElement.textContent = "";
+
     // 小說資料放入 #worksGallery
-    storedNovelArtworkData.forEach(novelArtwork => {
+    paginatedNovels.forEach(novelArtwork => {
         const artworkElement = document.createElement("div");
         artworkElement.className = "novelWork";
 

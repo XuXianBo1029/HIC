@@ -613,12 +613,12 @@ body {
     }
 }
 
-#pagination {
+#paginationConinter {
     display: inline-block;
     align-items: center;
 }
 
-#pagination a {
+#paginationConinter a {
     color: var(--main-text-color);
     min-width: 24px;
     min-height: 24px;
@@ -631,12 +631,12 @@ body {
     border-radius: 50%;
 }
 
-#pagination a:hover {
+#paginationConinter a:hover {
     color: var(--main-bg-color);
     background-color: var(--main-text-color);
 }
 
-#pagination a.active {
+#paginationConinter a.active {
     background-color: var(--main-button-color);
     color: #000000;
 }
@@ -645,6 +645,12 @@ body {
 #scrollToTopButton {
     background-color: var(--main-button-color);
     transition-duration: 0.4s;
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    border-radius: 50%;
 }
 
 #scrollToTopButton:hover {
@@ -656,12 +662,3 @@ body {
     
 }
 
-/* 捲動到頂部 */
-#scrollToTopButton {
-    width: 48px;
-    height: 48px;
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    border-radius: 50%;
-}
