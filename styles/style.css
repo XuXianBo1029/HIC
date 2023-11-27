@@ -510,7 +510,7 @@ body {
     /* border: 1px solid white; */
     margin: 3px auto 3px auto;
     width: 48%;
-    height: 220px;
+    height: auto;
 }
 
 .novelSeries, .novelTitle, .novelAuthor {    
@@ -630,6 +630,12 @@ body {
     }
 }
 
+@media only screen and (max-width: 350px) {
+    .novelImg img {
+        display: none;
+    }
+}
+
 /* 插畫 */
 .illustrationWork {
     display: flex;
@@ -638,7 +644,7 @@ body {
     /* border: 1px solid white; */
     margin: 3px auto 3px auto;
     width: 16%;
-    height: 190px;
+    height: auto;
 }
 
 .illustrationTitle, .illustrationAuthor {    
@@ -661,7 +667,8 @@ body {
 
 
 .illustrationInfo1, .illustrationInfo2, .illustrationInfo3 {    
-    width: 128px;
+    width: 100%;
+    height: auto;
     /* max-height: 100%;
     max-width: 100%; */
     overflow: hidden;
@@ -686,8 +693,8 @@ body {
 }
 
 .illustrationImg img {    
-    width: 128px;
-    height: 128px;
+    width: 100%;
+    height: auto;
     object-fit: cover;
 }
 

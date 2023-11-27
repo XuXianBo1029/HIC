@@ -24,15 +24,15 @@ let currentDate = new Date();
 
 // 隨機產生10000個小說資料
 for (let i = 10000; i > 0; i--) {
-    const seriesName = `作品系列名稱${i} 名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱`;
-    const seriesLink = `/series/${i}`;
-    const title = `小說標題${i} 標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題`;
-    const artworkLink = `/artworks/${i}`;
-    const author = `作者${i} 作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者`;
-    const artistLink = `/users/${i}`;
-    const description = `這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。`;                
+    const seriesName = '作品系列名稱${i} 名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱名稱';
+    const seriesLink = '/series/${i}';
+    const title = '小說標題${i} 標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題';
+    const artworkLink = '/artworks/${i}';
+    const author = '作者${i} 作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者';
+    const artistLink = '/users/${i}';
+    const description = '這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。這是小說${i}的說明。';                
     const tags = generateRandomTags();
-    const cover = `./mockData/novel/cover.png`;
+    const cover = './mockData/novel/cover' + (Math.floor(Math.random() * (5)) + 1) + '.png';
     const wordCount = Math.floor(Math.random() * (10000 - 100 + 1)) + 100; // 隨機100~10000之間
     const publishTime = currentDate.toISOString();                
     const likes = Math.floor(Math.random() * 10001); // 隨機0~10000之間
@@ -63,11 +63,11 @@ currentDate = new Date();
 
 // 隨機產生10000個插畫資料
 for (let i = 10000; i > 0; i--) {
-    const title = `插畫標題${i} 標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題`;
-    const artworkLink = `/artworks/${i}`;
-    const author = `作者${i} 作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者`;
-    const artistLink = `/users/${i}`;
-    const preview = `./mockData/illustration/illustration` + (Math.floor(Math.random() * (8 + 1)) + 1) + '.png'; // 隨機1~8之間
+    const title = '插畫標題${i} 標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題';
+    const artworkLink = '/artworks/${i}';
+    const author = '作者${i} 作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者';
+    const artistLink = '/users/${i}';
+    const preview = './mockData/illustration/illustration' + (Math.floor(Math.random() * (9)) + 1) + '.png'; // 隨機1~9之間
     const tags = generateRandomTags();
     const publishTime = currentDate.toISOString();                
     const likes = Math.floor(Math.random() * 10001); // 隨機0~10000之間
