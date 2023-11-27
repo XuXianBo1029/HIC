@@ -121,7 +121,7 @@ document.getElementById('searchForm').addEventListener('submit', function (event
         loadNovel(1);
     // 如果選擇插畫類型
     } else if (selectedWorkType == 'illustration') {
-        //loadillustration(1);
+        loadIllustration(1);
     // 如果選擇漫畫類型
     } else if (selectedWorkType == 'comic') {
         //loadcomic(1);
@@ -238,7 +238,7 @@ function workTypeSelection(workType) {
         novelWorkTypeButton.style.borderTop = "3px solid blue";
     // 如果選擇插畫類型
     } else if (selectedWorkType == 'illustration') {
-        //loadIllustration(1);
+        loadIllustration(1);
 
         novelWorkTypeButton.disabled = false;
         comicWorkTypeButton.disabled = false;
@@ -283,7 +283,7 @@ function generatePagination(numberOfFilteredNovels, artworksPerPage, selectPage)
 
     // 生成頁數
     let minPage, maxPage;
-
+    // 總頁數大於7 一定會生成7頁
     if (totalPages > 7) {
         if (selectPage + 3 <= 7) {
             minPage = 1;
@@ -300,6 +300,7 @@ function generatePagination(numberOfFilteredNovels, artworksPerPage, selectPage)
         maxPage = totalPages;
     }
 
+    // 生成頁數
     for (let i = minPage; i <= maxPage; i++) {
         const pageLink = document.createElement('a');
         pageLink.id = `page${i}`;
@@ -333,9 +334,9 @@ function goToPage(selectPage) {
     if (selectedWorkType == 'novel') {
         loadNovel(selectPage);
     } else if (selectedWorkType == 'illustration') {
-        //loadIllustration(1);
+        loadIllustration(selectPage);
     } else if (selectedWorkType == 'comic') {
-        //loadComic(1);
+        //loadComic(selectPage);
     }
 }
 
@@ -465,6 +466,123 @@ function loadNovel(selectPage) {
 
         const infoElement = document.createElement("div");
         infoElement.className = "novelInfo";
+        artworkElement.appendChild(info1Element);
+        artworkElement.appendChild(info2Element);
+
+        galleryElement.appendChild(artworkElement);
+    });
+}
+
+/* 讀取插畫資料第幾頁 */
+function loadIllustration(selectPage) {
+    // 取得搜尋標籤
+    let inputTags = document.getElementById('searchInput').value.trim();
+
+    // 使用正規表達式替換多個空白為單一空白，如果沒有輸入就是空陣列
+    inputTags = (inputTags !== '') ? inputTags.replace(/\s+/g, ' ').split(' ') : [];
+    
+    document.getElementById('searchTags').textContent = inputTags.join(' ');
+
+    let filteredIllustrations;
+    
+    if (inputTags.length > 0) {
+        // 使用 filter 函數過濾符合搜尋標籤的插畫
+        filteredIllustrations = illustrationArtworkData.filter(illustration => {
+            // 使用 every 函數檢查 illustration 的 tags 是否包含所有搜尋標籤
+            return inputTags.every(searchTag => illustration.tags.includes(searchTag));
+        });
+    } else {
+        // 搜尋標籤沒有輸入標籤則不過濾標籤
+        filteredIllustrations = illustrationArtworkData;
+    }
+
+    // 取得共有多少個作品
+    const numberOfFilteredIllustrations = filteredIllustrations.length;
+
+    document.getElementById('searchTagsCount').textContent = numberOfFilteredIllustrations + ' 作品';
+
+    // 使用 slice 函數從 filteredIllustrations 中提取指定範圍的元素
+    // 範圍為第(page - 1) * 20 + 1 個作品 到 第(page - 1) * 20 + 20 個作品
+    let startIndex = (selectPage - 1) * 20;
+    let endIndex = Math.min(startIndex + 20, filteredIllustrations.length);
+    const paginatedIllustrations = filteredIllustrations.slice(startIndex, endIndex);
+
+    // 生成分頁
+    generatePagination(numberOfFilteredIllustrations, 20, selectPage);
+
+    const galleryElement = document.getElementById("worksGallery");
+
+    galleryElement.textContent = "";
+
+    // 插畫資料放入 #worksGallery
+    paginatedIllustrations.forEach(illustrationArtwork => {
+        const artworkElement = document.createElement("div");
+        artworkElement.className = "illustrationWork";
+
+        // 圖片連結
+        const imgElement = document.createElement("img");
+        imgElement.src = illustrationArtwork.preview;
+        imgElement.alt = illustrationArtwork.title;
+        const imgLinkElement = document.createElement("a");
+        imgLinkElement.href = illustrationArtwork.artworkLink;
+        imgLinkElement.className = "illustrationImg";
+        imgLinkElement.appendChild(imgElement);
+
+        // 標題連結
+        const titleLinkElement = document.createElement("a");
+        titleLinkElement.href = illustrationArtwork.artworkLink;
+        titleLinkElement.className = "illustrationTitle";
+        titleLinkElement.textContent = illustrationArtwork.title;
+        titleLinkElement.title = illustrationArtwork.title;
+        
+        // 作者連結
+        const authorLinkElement = document.createElement("a");
+        authorLinkElement.href = illustrationArtwork.artistLink;
+        authorLinkElement.className = "illustrationAuthor";
+        authorLinkElement.textContent = illustrationArtwork.author;
+        authorLinkElement.title = illustrationArtwork.author;
+
+        /*
+        // 標籤
+        const tagsElement = document.createElement("div");
+        tagsElement.className = "illustrationTags";
+        for (const tag of illustrationArtwork.tags) {
+            const tagElement = document.createElement("a");
+            tagElement.textContent = '#' + tag;
+            tagsElement.appendChild(tagElement);
+        }
+        */
+        /*
+        // 投稿日期            
+        const publishTimeElement = document.createElement("p");
+        publishTimeElement.className = "illustrationPublishTime";
+        publishTimeElement.textContent = formatTimeDifference(illustrationArtwork.publishTime);
+        */
+        /*
+        // 喜歡數量
+        const likesElement = document.createElement("p");
+        likesElement.className = "illustrationLikes";
+        likesElement.textContent = illustrationArtwork.likes;
+        */
+       
+        const info1Element = document.createElement("div");
+        info1Element.className = "illustrationInfo1";
+        info1Element.appendChild(imgLinkElement);
+
+        const info2Element = document.createElement("div");
+        info2Element.className = "illustrationInfo2";
+        info2Element.appendChild(titleLinkElement);
+        info2Element.appendChild(authorLinkElement);
+        // info2Element.appendChild(tagsElement);
+
+        const info3Element = document.createElement("div");
+        info3Element.className = "illustrationInfo3";
+        // info3Element.appendChild(publishTimeElement);
+        // info3Element.appendChild(likesElement);
+        info2Element.appendChild(info3Element);
+
+        const infoElement = document.createElement("div");
+        infoElement.className = "illustrationInfo";
         artworkElement.appendChild(info1Element);
         artworkElement.appendChild(info2Element);
 
