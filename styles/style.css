@@ -667,7 +667,7 @@ body {
 
 
 .illustrationInfo1, .illustrationInfo2, .illustrationInfo3 {    
-    width: 100%;
+    width: 128px;
     height: auto;
     /* max-height: 100%;
     max-width: 100%; */
@@ -693,8 +693,8 @@ body {
 }
 
 .illustrationImg img {    
-    width: 100%;
-    height: auto;
+    width: 128px;
+    height: 128px;
     object-fit: cover;
 }
 
@@ -737,7 +737,6 @@ body {
 }
 
 @media only screen and (max-width: 300px) {
-    
     .illustrationWork {
         width: 100%;
     }
@@ -745,29 +744,31 @@ body {
 
 /* 頁數 */
 #paginationContainer {
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
 }
 
 #paginationContainer a {
     color: var(--main-text-color);
-    min-width: 24px;
-    min-height: 24px;
     padding: 16px;
     align-items: center;
     font-weight: bold;
     text-decoration: none;
     transition: background-color .3s;
     border: 0px solid var(--main-text-color);
-    border-radius: 50%;
 }
 
 #paginationContainer a:hover {
+    cursor: pointer;
     color: var(--main-bg-color);
     background-color: var(--main-text-color);
 }
 
 #paginationContainer a.selectedPage {
+    cursor: default;
     background-color: var(--main-button-color);
     color: #000000;
 }

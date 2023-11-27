@@ -304,13 +304,14 @@ function generatePagination(numberOfFilteredNovels, artworksPerPage, selectPage)
     for (let i = minPage; i <= maxPage; i++) {
         const pageLink = document.createElement('a');
         pageLink.id = `page${i}`;
-        pageLink.textContent = i;
-        pageLink.onclick = function() {
-            goToPage(i);
-        };
+        pageLink.textContent = i;        
 
         if (i === selectPage) {
             pageLink.classList.add('selectedPage');
+        } else {
+            pageLink.onclick = function() {
+                goToPage(i);
+            };
         }
 
         paginationContainer.appendChild(pageLink);
@@ -502,13 +503,13 @@ function loadIllustration(selectPage) {
     document.getElementById('searchTagsCount').textContent = numberOfFilteredIllustrations + ' 作品';
 
     // 使用 slice 函數從 filteredIllustrations 中提取指定範圍的元素
-    // 範圍為第(page - 1) * 20 + 1 個作品 到 第(page - 1) * 20 + 20 個作品
-    let startIndex = (selectPage - 1) * 20;
-    let endIndex = Math.min(startIndex + 20, filteredIllustrations.length);
+    // 範圍為第(page - 1) * 60 + 1 個作品 到 第(page - 1) * 60 + 60 個作品
+    let startIndex = (selectPage - 1) * 60;
+    let endIndex = Math.min(startIndex + 60, filteredIllustrations.length);
     const paginatedIllustrations = filteredIllustrations.slice(startIndex, endIndex);
 
     // 生成分頁
-    generatePagination(numberOfFilteredIllustrations, 20, selectPage);
+    generatePagination(numberOfFilteredIllustrations, 60, selectPage);
 
     const galleryElement = document.getElementById("worksGallery");
 
