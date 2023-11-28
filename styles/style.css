@@ -540,6 +540,7 @@ body {
 }
 
 .novelInfo1 {
+    display: flex;
     flex: 0 0 auto;    
 }
 
@@ -553,7 +554,7 @@ body {
 }
 
 .novelImg {
-    
+    position: relative;
 }
 
 .novelImg img {    
@@ -643,7 +644,7 @@ body {
     align-items: center;
     /* border: 1px solid white; */
     margin: 3px auto 3px auto;
-    width: 16%;
+    width: 19%;
     height: auto;
 }
 
@@ -667,7 +668,7 @@ body {
 
 
 .illustrationInfo1, .illustrationInfo2, .illustrationInfo3 {    
-    width: 128px;
+    width: 180px;
     height: auto;
     /* max-height: 100%;
     max-width: 100%; */
@@ -676,6 +677,7 @@ body {
 }
 
 .illustrationInfo1 {
+    display: flex;
     /* flex: 0 0 auto; */
 }
 
@@ -689,18 +691,29 @@ body {
 }
 
 .illustrationImg {
-    
+    position: relative;    
 }
 
 .illustrationImg img {    
-    width: 128px;
-    height: 128px;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
 }
 
 .illustrationImg img:hover {
     filter: brightness(70%);
     cursor: pointer;
+}
+
+.illustrationCount {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    color: white;
+    background-color: rgba(128, 128, 128, 0.5);
+    padding: 3px;
+    border-radius: 5px;
+    margin: 0;
 }
 
 
@@ -714,29 +727,23 @@ body {
 
 @media only screen and (max-width: 1000px) {
     .illustrationWork {
-        width: 19%;
+        width: 24%;
     }
 }
 
 @media only screen and (max-width: 800px) {
     .illustrationWork {
-        width: 24%;
-    }
-}
-
-@media only screen and (max-width: 650px) {
-    .illustrationWork {
         width: 33%;
     }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 600px) {
     .illustrationWork {
         width: 49%;
     }
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 400px) {
     .illustrationWork {
         width: 100%;
     }

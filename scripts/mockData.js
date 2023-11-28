@@ -69,6 +69,7 @@ for (let i = 10000; i > 0; i--) {
     const artistLink = '/users/' + i;
     const preview = './mockData/illustration/illustration' + (Math.floor(Math.random() * (9)) + 1) + '.png'; // 隨機1~9之間
     const tags = generateRandomTags();
+    const illustrationCount = Math.floor(Math.random() * (30)) + 1; // 隨機1~30之間
     const publishTime = currentDate.toISOString();                
     const likes = Math.floor(Math.random() * 10001); // 隨機0~10000之間
 
@@ -79,7 +80,41 @@ for (let i = 10000; i > 0; i--) {
         artistLink: artistLink,
         preview: preview,
         tags: tags,
+        illustrationCount: illustrationCount,
         publishTime: publishTime,
+        likes: likes
+    });
+
+    currentDate.setMinutes(currentDate.getMinutes() - 30); // 每個作品投稿時間減少半小時
+}
+
+// 模擬的假伺服器漫畫作品資料
+const comicArtworkData = [];
+
+// 模擬漫畫投稿日期 以現在
+currentDate = new Date();
+
+// 隨機產生10000個漫畫資料
+for (let i = 10000; i > 0; i--) {
+    const title = '漫畫標題' + i + ' 標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題';
+    const artworkLink = '/artworks/' + i;
+    const author = '作者' + i + ' 作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者作者';
+    const artistLink = '/users/' + i;
+    const preview = './mockData/comic/comic' + (Math.floor(Math.random() * (5)) + 1) + '.png'; // 隨機1~9之間
+    const tags = generateRandomTags();
+    const comicCount = Math.floor(Math.random() * (30)) + 1; // 隨機1~30之間
+    const publishTime = currentDate.toISOString();                
+    const likes = Math.floor(Math.random() * 10001); // 隨機0~10000之間
+
+    comicArtworkData.push({
+        title: title, 
+        artworkLink: artworkLink, 
+        author: author, 
+        artistLink: artistLink, 
+        preview: preview, 
+        tags: tags, 
+        comicCount: comicCount, 
+        publishTime: publishTime, 
         likes: likes
     });
 
