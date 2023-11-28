@@ -50,13 +50,33 @@ body {
     width: 100%;
 }
 
-#navbarRight {
-    
-}
-
 .expand {
     
 }
+
+@media only screen and (max-width: 800px) {
+    #navbarRight > div {
+        width: 100%;
+        margin: 0;
+    }
+    #navbarRight .navbarbtn {
+        width: 100%;
+        border-radius: 10px !important;
+    }
+}
+
+/*
+@media only screen and (max-width: 380px) {
+    #navbarRight > div {
+        width: 100%;
+        margin: 0;
+    }
+    #navbarRight .navbarbtn {
+        width: 100%;
+        border-radius: 10px !important;
+    }
+}
+*/
 
 /* logo-image */
 #logoImageContainer {
@@ -109,12 +129,17 @@ body {
 }
 
 #searchButton {
+    padding: 10px;
+    transition-duration: 0.4s;
     background-color: transparent;
-    border-radius: 10px;    
+    font-size: var(--main-font-size) + 2;
+    font-weight: bold;
+    border-radius: 10px;
     border: none;
 }
 
-#searchResults {        
+#searchResults {   
+    z-index: 1;     
     border: 2px solid #ccc;
     border-radius: 12px;
     width: 100%;    
@@ -173,6 +198,7 @@ body {
 
 /* 投稿作品選項 */
 #submissionOptions {
+    z-index: 1;
     background-color: var(--main-button-color);
     width: 100%;
     padding: 10px 0;
@@ -230,17 +256,20 @@ body {
     #navbar {
         flex-direction: column;
     }
+
     #navbarLeft, #navbarRight {
-        width: 100%;        
-    }
+        width: 100%;
+    }        
 
     #navbarRight {
         display: none;
     }
+
     #navbarRight.expand {
         display: flex;
         justify-content: center;
     }
+
     #memuBottonContainer {
         display: flex;
     }
@@ -248,11 +277,17 @@ body {
 
 @media only screen and (max-width: 380px) {
     #navbarLeft {
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
     }
+
     #navbarRight.expand {
         display: flex;
         flex-direction: column;
+    }
+
+    #searchContainer {
+        order: -1;
     }
 }
 
@@ -291,6 +326,7 @@ body {
 }
 
 #accountOptions {
+    z-index: 1;
     display: none;
     position: absolute;
     top: 100%;
@@ -337,10 +373,24 @@ body {
     cursor: pointer;
 }
 
+@media only screen and (max-width: 380px) {
+    #accountOptions {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%);
+        overflow: auto;
+        border: 2px solid var(--main-button-color);
+        background-color: var(--main-bg-color);
+    }
+}
+
 /* 登入、註冊互動視窗 */
 #loginModal, #signUpModal {
     display: none;
     position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -801,3 +851,16 @@ body {
     
 }
 
+
+
+
+
+/* 會員 */
+#account {
+    /* display: flex; */
+}
+
+/* 登入、註冊 */
+#navbarLogin {
+    /* display: none; */
+}
